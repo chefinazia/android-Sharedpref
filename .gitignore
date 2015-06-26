@@ -1,0 +1,54 @@
+package com.example.shareprefexample;
+
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.os.Build;
+
+public class MainActivity extends ActionBarActivity {
+
+	EditText username,pwd;
+	CheckBox c;
+	SharedPreferences pref = null;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		username = (EditText)findViewById(R.id.txtusername);
+		pwd = (EditText)findViewById(R.id.txtpassword);
+		c = (CheckBox)findViewById(R.id.checkBox1);
+		pref = getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
+		
+
+	}
+	
+	
+	
+	public void loginBtn(View v)
+	{
+		SharedPreferences.Editor e = pref.edit();
+		if(c.isChecked())
+		{
+			e.putString(username.getText().toString() , pwd.getText().toString());
+			Toast.makeText(this, "data Stored", Toast.LENGTH_LONG).show();
+		}
+		e.commit();
+		
+			
+		
+	}
+
+	
+
+}
